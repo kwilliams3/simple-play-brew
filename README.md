@@ -1,73 +1,38 @@
-# Welcome to your Lovable project
+# Neon Rush
 
-## Project info
+Un jeu de course arcade en français, développé avec React, TypeScript, Vite et Canvas 2D. Le jeu fonctionne dans le navigateur, sans serveur back-end.
 
-**URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
+## Lancer le jeu
 
-## How can I edit this code?
-
-There are several ways of editing your application.
-
-**Use Lovable**
-
-Simply visit the [Lovable Project](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and start prompting.
-
-Changes made via Lovable will be committed automatically to this repo.
-
-**Use your preferred IDE**
-
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
-
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
-
-Follow these steps:
-
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
-
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
+```powershell
+npm ci --legacy-peer-deps
 npm run dev
 ```
 
-**Edit a file directly in GitHub**
+Adresse locale : http://localhost:5174. Le port est fixé dans `vite.config.ts`.
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+## Commandes
 
-**Use GitHub Codespaces**
+- Flèches gauche / droite ou Q / D : changer de voie.
+- Espace maintenu : boost. Relâcher pour récupérer après épuisement.
+- P ou Échap : pause et reprise.
+- Entrée : commencer ou rejouer.
+- Sur mobile : boutons tactiles ou balayage horizontal du circuit.
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
+## Règles
 
-## What technologies are used for this project?
+Trois difficultés : Balade, Arcade et Expert. La vitesse augmente à chaque secteur ; les quartiers changent de palette. Éviter les obstacles roses, collecter les cristaux verts et les boucliers bleus. Un bouclier dure six secondes et absorbe un seul impact.
 
-This project is built with:
+Les cristaux rapportent de 50 à 200 points : le multiplicateur augmente tous les trois cristaux consécutifs et retombe si un cristal est manqué. Une esquive proche rapporte 25 points. Trois missions par partie rapportent chacune 300 points : collecter 8 cristaux, parcourir 1 000 mètres et réussir 4 esquives.
 
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
+Le record personnel est conservé dans le stockage local du navigateur. La partie se met en pause lorsque la fenêtre perd le focus ou que l’onglet devient invisible.
 
-## How can I deploy this project?
+## Vérifications
 
-Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
+```powershell
+npm run test
+npm run build
+node node_modules/typescript/bin/tsc --noEmit -p tsconfig.app.json
+```
 
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+La simulation est isolée dans `src/lib/neon-engine.ts`. Les tests couvrent notamment les collisions en changement de voie, les combos, les missions, les boucliers, le boost et les transitions de partie.

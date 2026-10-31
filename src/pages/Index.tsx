@@ -1,7 +1,7 @@
-import MemoryGame from "@/components/MemoryGame";
+import NeonRush from "@/components/NeonRush";
 
 const Index = () => {
-  return <MemoryGame />;
+  return <NeonRush />;
 };
 
 export default Index;
